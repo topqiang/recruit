@@ -40,7 +40,7 @@ class IndexController extends Controller {
 
     public function getpic(){
         $pic = M('Pic');
-        $w['status'] = array('neq' => 9);
+        $w['status'] = array('neq', 9);
         $res = $pic -> where($w) -> select();
         dump( $pic -> getLastsql() );
         exit();
