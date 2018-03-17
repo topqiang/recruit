@@ -11,7 +11,7 @@ class IndexController extends Controller {
 
     public function getclass(){
         $w['status'] = array('neq',9);
-        $res = $this -> meetfcla -> where($w) -> select();
+        $res = $this -> claobj -> where($w) -> select();
         if (!empty($res)) {
             apiResponse("success","请求成功！",$res);
         }else{
@@ -42,8 +42,6 @@ class IndexController extends Controller {
         $pic = M('Pic');
         $w['status'] = array('neq', 9);
         $res = $pic -> where($w) -> select();
-        dump( $pic -> getLastsql() );
-        exit();
         if (!empty( $res )) {
             apiResponse("success","请求成功！",$res);
         }else{
