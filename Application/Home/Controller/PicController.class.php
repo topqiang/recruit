@@ -42,9 +42,6 @@ class PicController extends AdminBasicController {
         }
     }
 
-
-
-
     public function editpic(){
         if(empty($_POST)){
             $w['id'] = $_GET['id'];
@@ -79,6 +76,5 @@ class PicController extends AdminBasicController {
             $this->error('操作失败');
         }
     }
-
     
 }

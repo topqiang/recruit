@@ -42,6 +42,8 @@ class IndexController extends Controller {
         $pic = M('Pic');
         $w['status'] = array('neq' => 9);
         $res = $pic -> where($w) -> select();
+        dump( $pic -> getLastsql() );
+        exit();
         if (!empty( $res )) {
             apiResponse("success","请求成功！",$res);
         }else{
