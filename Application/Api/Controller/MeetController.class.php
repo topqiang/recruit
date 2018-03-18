@@ -21,7 +21,7 @@ class MeetController extends Controller {
             $data['position'] = $_POST['position'];
             $data['email'] = $_POST['email'];
             $data['ctime'] = time();
-            $data['utime'] = time()
+            $data['utime'] = time();
             $cid = $this -> company -> add($data);
         }else{
             $cid = $has[0]['id'];
