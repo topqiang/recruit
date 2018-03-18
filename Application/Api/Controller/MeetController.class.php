@@ -17,10 +17,10 @@ class MeetController extends Controller {
             );
         $has = $this -> company -> where($data) -> limit(1) -> select();
         if (empty($has)) {
-            $data['people'] = $_POST['people'],
-            $data['position'] = $_POST['position'],
-            $data['email'] = $_POST['email'],
-            $data['ctime'] = time(),
+            $data['people'] = $_POST['people'];
+            $data['position'] = $_POST['position'];
+            $data['email'] = $_POST['email'];
+            $data['ctime'] = time();
             $data['utime'] = time()
             $cid = $this -> company -> add($data);
         }else{
