@@ -6,8 +6,10 @@ class IndexController extends Controller {
 		$this -> searchurl = "https://apis.map.qq.com/ws/place/v1/search?";
 		$this -> claobj = M('Class');
         $this -> meetfcla = M('Meetforclass');
-	}
+        $this -> mc = M('Mc');
+        $this -> mu = M('Mu');
 
+	}
 
     public function getclass(){
         $w['status'] = array('neq',9);
@@ -28,14 +30,32 @@ class IndexController extends Controller {
         if (!empty($_POST['p'])) {
             $p = $_POST['p'];
         }
-
         $res = $this -> meetfcla -> where( $w ) -> limit(($p-1)*15,15) -> select();
         if (!empty( $res )) {
             apiResponse("success","请求成功！",$res);
         }else{
             apiResponse("error","数据为空！");
         }
+    }
 
+    public function getmeetinfo(){
+        $w['status'] = array('neq',9);
+        if (!empty($_POST['id'])) {
+            $w['id'] = $_POST['id'];
+        }
+        $res = $this -> meetfcla -> where( $w ) -> limit(1) -> select();
+        $mc = $this -> mc -> where( 'cid='.$w['id'] ) -> select();
+        $mu = $this -> mu -> where( 'uid='.$w['id'] ) -> select();
+        $arr = array(
+            'cominfo' => $res[0],
+            'mclist' => $mc,
+            'mulist' => $mu
+            );
+        if (!empty( $res )) {
+            apiResponse("success","请求成功！",$arr);
+        }else{
+            apiResponse("error","数据为空！");
+        }
     }
 
     public function getpic(){
