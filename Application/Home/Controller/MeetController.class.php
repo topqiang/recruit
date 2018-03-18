@@ -13,7 +13,8 @@ class MeetController extends AdminBasicController {
         $this->checkLogin();
         $this->meet = M('Meet');
         $this->meetclass = M('Meetforclass');
-
+        $this -> mc = M('Mc');
+        $this -> mu = M('Mu');
         $this->classobj = M('Class');
 
     }
@@ -156,9 +157,6 @@ class MeetController extends AdminBasicController {
         }
     }
 
-
-
-
     public function editmeet(){
         if(empty($_POST)){
             $w['status'] = array('neq',9);
@@ -213,6 +211,29 @@ class MeetController extends AdminBasicController {
         }else{
             $this->error('操作失败');
         }
+    }
+
+
+    public function meetuser(){
+        $w['status'] = array('neq',9);
+        if (!empty($_POST['id'])) {
+            $w['id'] = $_POST['id'];
+        }
+        $mu = $this -> mu -> where( 'uid='.$w['id'] ) -> select();
+
+        $this->assign('list',$mu);
+        $this->display('meetuser');
+    }
+    public function meetcomp(){
+        $w['status'] = array('neq',9);
+        if (!empty($_POST['id'])) {
+            $w['id'] = $_POST['id'];
+        }
+        $mc = $this -> mc -> where( 'cid='.$w['id'] ) -> select();
+
+        $this->assign('list',$mc);
+        $this->display('meetcomp');
+        
     }
 
 
