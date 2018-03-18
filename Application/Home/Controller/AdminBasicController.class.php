@@ -13,7 +13,9 @@ class AdminBasicController extends Controller {
     /**
      * 初始化
      */
-    public function _initialize(){}
+    public function _initialize(){
+        $this -> width = '<style>img{width:100% !important;}* img{width:100% !important;}</style>';
+    }
 
     /**
      * 判断登陆

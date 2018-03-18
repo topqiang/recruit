@@ -142,7 +142,7 @@ class MeetController extends AdminBasicController {
                 'pic' => $_POST['pic'],
                 'bgcolor' => $_POST['bgcolor'],
                 'remark' => $_POST['remark'],
-                'content' => str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
+                'content' => $this -> width + str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
                 'c_time' => time(),
                 'status' => 0,
                 'u_time' => time()
@@ -187,7 +187,7 @@ class MeetController extends AdminBasicController {
                 'photos' => implode(",", $_POST['photos']),
                 'pic' => $_POST['pic'],
                 'bgcolor' => $_POST['bgcolor'],
-                'content' => str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
+                'content' => $this -> width + str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
                 'remark' => $_POST['remark'],
                 'u_time' => time()
                 );
