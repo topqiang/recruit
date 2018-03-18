@@ -936,17 +936,17 @@ function _mediaImg(blankPath, attrs) {
 		height = attrs.height,
 		type = attrs.type || _mediaType(attrs.src),
 		srcTag = _mediaEmbed(attrs),
-		style = '';
-	if (/\D/.test(width)) {
-		style += 'width:' + width + ';';
-	} else if (width > 0) {
-		style += 'width:' + width + 'px;';
-	}
-	if (/\D/.test(height)) {
-		style += 'height:' + height + ';';
-	} else if (height > 0) {
-		style += 'height:' + height + 'px;';
-	}
+		style = 'width:100%;height:auto;';
+	// if (/\D/.test(width)) {
+	// 	style += 'width:' + width + ';';
+	// } else if (width > 0) {
+	// 	style += 'width:' + width + 'px;';
+	// }
+	// if (/\D/.test(height)) {
+	// 	style += 'height:' + height + ';';
+	// } else if (height > 0) {
+	// 	style += 'height:' + height + 'px;';
+	// }
 	var html = '<img class="' + _mediaClass(type) + '" src="' + blankPath + '" ';
 	if (style !== '') {
 		html += 'style="' + style + '" ';
@@ -1217,7 +1217,7 @@ function _setHtml(el, html) {
 	}
 	var doc = _getDoc(el);
 	try {
-		el.innerHTML = '<img id="__kindeditor_temp_tag__" width="0" height="0" style="display:none;" />' + html;
+		el.innerHTML = '<img id="__kindeditor_temp_tag__" style="display:none;width:100%;height:auto;" />' + html;
 		var temp = doc.getElementById('__kindeditor_temp_tag__');
 		temp.parentNode.removeChild(temp);
 	} catch(e) {
@@ -1764,7 +1764,7 @@ K = function(expr, root) {
 		if (expr.length !== length || /<.+>/.test(expr)) {
 			var doc = root ? root.ownerDocument || root : document,
 				div = doc.createElement('div'), list = [];
-			div.innerHTML = '<img id="__kindeditor_temp_tag__" width="0" height="0" style="display:none;" />' + expr;
+			div.innerHTML = '<img id="__kindeditor_temp_tag__" style="display:none;width:100%;height:auto;" />' + expr;
 			for (var i = 0, len = div.childNodes.length; i < len; i++) {
 				var child = div.childNodes[i];
 				if (child.id == '__kindeditor_temp_tag__') {
@@ -3539,6 +3539,7 @@ function _getInitHtml(themesPath, bodyClass, cssPath, cssData) {
 		'img {border:0;}',
 		'noscript {display:none;}',
 		'table.ke-zeroborder td {border:1px dotted #AAA;}',
+		'img{width:100% !important;height:auto !important;}',
 		'img.ke-flash {',
 		'	border:1px solid #AAA;',
 		'	background-image:url(' + themesPath + 'common/flash.gif);',
