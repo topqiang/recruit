@@ -36,7 +36,7 @@ class CompanyController extends AdminBasicController {
                 'tel' => $_POST['tel'],
                 'position' => $_POST['position'],   
                 'remark' => $_POST['remark'],
-                'desc' => str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
+                'desc' => str_replace('img src="/Public/', 'img style="width:100%;height:auto;" src="http://test.kanziqiang.top/Public/',$_POST['content']),
                 'ctime' => time(),
                 'status' => 0,
                 'utime' => time()
@@ -69,7 +69,7 @@ class CompanyController extends AdminBasicController {
                 'tel' => $_POST['tel'],
                 'position' => $_POST['position'],   
                 'remark' => $_POST['remark'],
-                'desc' => str_replace('/Public/', 'http://test.kanziqiang.top/Public/',$_POST['content']),
+                'desc' => str_replace('img src="/Public/', 'img style="width:100%;height:auto;" src="http://test.kanziqiang.top/Public/',$_POST['content']),
                 'utime' => time()
                 );
             $res = $this->company->save($data);
