@@ -38,7 +38,7 @@ class MeetController extends Controller {
         if (!empty($res)) {
             apiResponse("success","申请报名成功，等待管理员审核！",$res);
         }else{
-            apiResponse("error","申请失败！")
+            apiResponse("error","申请失败！");
         }
     }
     
