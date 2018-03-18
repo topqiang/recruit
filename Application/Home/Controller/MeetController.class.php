@@ -134,6 +134,7 @@ class MeetController extends AdminBasicController {
             $data = array(
                 'title' => $_POST['title'],
                 'open_time' => $_POST['open_time'],
+                'end_time' => $_POST['end_time'],
                 'lnt' => $_POST['lnt'],
                 'lat' => $_POST['lat'],
                 'address' => $_POST['address'],
@@ -177,6 +178,7 @@ class MeetController extends AdminBasicController {
                 'id' => $_POST['id'],
                 'title' => $_POST['title'],
                 'open_time' => $_POST['open_time'],
+                'end_time' => $_POST['end_time'],
                 'lnt' => $_POST['lnt'],
                 'lat' => $_POST['lat'],
                 'address' => $_POST['address'],
