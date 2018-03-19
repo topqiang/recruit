@@ -9,9 +9,8 @@ class LoginController extends Controller {
     	$appId = "wxe900513990933078";
     	$appKey = "8844c389cef08accd7ea86abfffbfb7e";
     	$url = "https://api.weixin.qq.com/sns/jscode2session?appid=$appId&secret=$appKey&js_code=$js_code&grant_type=authorization_code";
-    	echo $this -> curl("",$url);
-
-    	exit();
+    	$obj = json_decode($this -> curl("",$url),true);
+    	$this -> authlogin($obj->openid);
     }
 
     public function curl($data,$url){
@@ -31,8 +30,8 @@ class LoginController extends Controller {
     }
 
 	//用户登录
-	public function authlogin(){
-		$openid = $_POST['openid'];
+	public function authlogin($openid){
+		//$openid = $_POST['openid'];
 		if (!$openid) {
 			echo json_encode(array('status'=>0,'err'=>'授权失败！'.__LINE__));
 			exit();
@@ -45,27 +44,19 @@ class LoginController extends Controller {
 			$save['num'] = $userinfo['num'] +1;
 			$save['utime'] = time();
 			$changenum = M('user')->where('id='.intval($uid))->save($save);
-			$err = array();
-			$err['ID'] = intval($uid);
-			$err['nickname'] = $userinfo['uname'];
-			$err['headurl'] = $userinfo['photo'];
-			$err['name'] = $userinfo['name'];
-			$err['sex'] = $userinfo['sex'];
-			$err['birth'] = $userinfo['birth'];
-			$err['tel'] = $userinfo['tel'];
-			$err['num'] = $userinfo['num'];
-			echo json_encode(array('status'=>1,'arr'=>$err));
+			echo json_encode(array('status'=>1,'arr'=>$userinfo));
 			exit();
 		}else{
 			$data = array();
-			$data['name'] = $_POST['NickName'];
-			$data['uname'] = $_POST['NickName'];
-			$data['photo'] = $_POST['HeadUrl'];
+			$data['name'] = $_POST['nickName'];
+			$data['nickname'] = $_POST['nickName'];
+			$data['headpic'] = $_POST['avatarUrl'];
 			$data['sex'] = $_POST['gender'];
-			$data['pwd'] = md5("123456");
+			$data['city'] = $_POST['city'];
+			$data['num'] = 0;
+			$data['status'] = 0;
 			$data['openid'] = $openid;
-			$data['source'] = 'wx';
-			$data['addtime'] = time();
+			$data['ctime'] = time();
 			$data['utime'] = time();
 			if (!$data['openid']) {
 				echo json_encode(array('status'=>0,'err'=>'授权失败！'.__LINE__));
@@ -75,8 +66,9 @@ class LoginController extends Controller {
 			if ($res) {
 				$err = array();
 				$err['ID'] = intval($res);
-				$err['NickName'] = $data['name'];
-				$err['HeadUrl'] = $data['photo'];
+				$err['name'] = $data['name'];
+				$err['headpic'] = $data['headpic'];
+				$err['openid'] = $openid;
 				echo json_encode(array('status'=>1,'arr'=>$err));
 				exit();
 			}else{
